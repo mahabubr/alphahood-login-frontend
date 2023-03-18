@@ -1,5 +1,5 @@
-import React from 'react';
-import logo from '../Assets/logo.png'
+import React, { useEffect, useState } from 'react';
+// import logo from '../Assets/logo.png'
 import banner from '../Assets/banner.png'
 import { Link } from 'react-router-dom';
 import '../App.css'
@@ -7,17 +7,24 @@ import CountUp from 'react-countup';
 
 const OTP = () => {
 
+    const [items, setItems] = useState({})
+    useEffect(() => {
+        fetch('http://localhost:5000/items')
+            .then(res => res.json())
+            .then(data => setItems(data))
+    }, [])
+
     return (
         <div className=''>
             <div className='p-10 flex justify-between items-center'>
-                <img className='w-6 h-6' src={logo} alt="" />
+                <img className='w-6 h-6' src={items.img} alt="" />
                 <p className='lg:hidden block text-sm'>Not member?  <span className='text-[#0858F7] cursor-pointer'>Create account</span></p>
             </div>
             <div className='grid lg:grid-cols-2 w-11/12 mx-auto'>
                 <div className='lg:p-16 xl:p-36 md:p-36 p-4'>
                     <h1 className='text-left text-3xl font-bold'>Enter the verification code to continue</h1>
                     <p className='text-[#7A7A85] mt-4 font-medium'>We sent to <span className='text-[#0858F7] font-bold cursor-pointer'>hellouser@heads.design</span>. If you don’t see it, check your spam.</p>
-                    <Link to='/success'>
+                    <Link to='/admin'>
                         <div className='grid grid-cols-6 gap-3 mt-10'>
                             <input type="text" className='outline-[#0858F7] border-2 border-[#0858F7] rounded-xl w-full p-4 text-center' />
                             <input type="text" className='outline-[#0858F7] border-2 border-[#0858F7] rounded-xl w-full p-4 text-center' />

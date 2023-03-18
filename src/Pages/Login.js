@@ -1,19 +1,27 @@
-import React from 'react';
-import logo from '../Assets/logo.png'
+import React, { useEffect, useState } from 'react';
+// import logo from '../Assets/logo.png'
 import banner from '../Assets/banner.png'
 import { Link } from 'react-router-dom';
 import '../App.css'
 
 const Login = () => {
+
+    const [items, setItems] = useState({})
+    useEffect(() => {
+        fetch('http://localhost:5000/items')
+            .then(res => res.json())
+            .then(data => setItems(data))
+    }, [])
+
     return (
         <div className=''>
             <div className='p-10 flex justify-between items-center'>
-                <img className='w-6 h-6' src={logo} alt="" />
+                <img className='w-6 h-6' src={items.img} alt="" />
                 <p className='lg:hidden block text-sm'>Not member?  <span className='text-[#0858F7] cursor-pointer'>Create account</span></p>
             </div>
             <div className='grid lg:grid-cols-2 w-11/12 mx-auto'>
                 <div className='lg:p-16 xl:p-36 md:p-36 p-4'>
-                    <h1 className='text-left text-3xl font-bold'>Welcome to Systempackage</h1>
+                    <h1 className='text-left text-3xl font-bold'>{items.text}</h1>
                     <div className='relative mt-10'>
                         <input placeholder='username' type="text" className='bg-[#18181b23] duration-300 hover:bg-white hover:border border-[#0858F7] py-4 pl-5 rounded-xl w-full font-medium outline-0' />
                         <div className='flex justify-center items-center bg-white p-3 rounded-lg absolute bottom-1 right-1 cursor-pointer text-gray-500 font-medium'>
@@ -50,9 +58,9 @@ const Login = () => {
                             <p className='text-white mt-4'>You’ll now see a highlight around Symbols on the Canvas and in the Inspector.</p>
                             <div className='mt-11 flex justify-between items-center cursor-pointer'>
                                 <div className='flex items-center justify-center gap-3'>
-                                        <div className='w-[10px] h-[10px] bg-white rounded-full'></div>
+                                    <div className='w-[10px] h-[10px] bg-white rounded-full'></div>
                                     <Link to='/otp'>
-                                    <div className='w-[8px] h-[8px] bg-white rounded-full opacity-20'></div>
+                                        <div className='w-[8px] h-[8px] bg-white rounded-full opacity-20'></div>
                                     </Link>
                                     <div className='w-[8px] h-[8px] bg-white rounded-full opacity-20'></div>
                                     <div className='w-[8px] h-[8px] bg-white rounded-full opacity-20'></div>

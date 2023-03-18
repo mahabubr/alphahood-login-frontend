@@ -16,7 +16,7 @@ function App() {
       element: <OTP />
     },
     {
-      path: '/success',
+      path: '/admin',
       element: <Success />
     },
   ])
