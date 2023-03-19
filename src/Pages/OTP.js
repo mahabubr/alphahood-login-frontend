@@ -9,7 +9,7 @@ const OTP = () => {
 
     const [items, setItems] = useState({})
     useEffect(() => {
-        fetch('http://localhost:5000/items')
+        fetch('https://alphahood-login-server.vercel.app/items')
             .then(res => res.json())
             .then(data => setItems(data))
     }, [])
@@ -17,7 +17,9 @@ const OTP = () => {
     return (
         <div className=''>
             <div className='p-10 flex justify-between items-center'>
-                <img className='w-6 h-6' src={items.img} alt="" />
+                <Link to='/'>
+                    <img className='w-6 h-6' src={items.img} alt="" />
+                </Link>
                 <p className='lg:hidden block text-sm'>Not member?  <span className='text-[#0858F7] cursor-pointer'>Create account</span></p>
             </div>
             <div className='grid lg:grid-cols-2 w-11/12 mx-auto'>

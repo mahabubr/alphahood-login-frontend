@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Success = () => {
 
     const [items, setItems] = useState({})
     useEffect(() => {
-        fetch('http://localhost:5000/items')
+        fetch('https://alphahood-login-server.vercel.app/items')
             .then(res => res.json())
             .then(data => setItems(data))
     }, [])
@@ -13,7 +14,7 @@ const Success = () => {
         e.preventDefault()
 
         const text = e.target.updateText.value
-        fetch('http://localhost:5000/item-text/', {
+        fetch('https://alphahood-login-server.vercel.app/item-text/', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -44,7 +45,7 @@ const Success = () => {
             .then(imageData => {
                 if (imageData.success) {
                     const img = imageData.data.url
-                    fetch('http://localhost:5000/item-img/', {
+                    fetch('https://alphahood-login-server.vercel.app/item-img/', {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'
@@ -65,7 +66,9 @@ const Success = () => {
     return (
         <div className=''>
             <div className='p-10 flex'>
-                <img className='w-6 h-6' src={items.img} alt="" />
+                <Link to='/'>
+                    <img className='w-6 h-6' src={items.img} alt="" />
+                </Link>
             </div>
             <div className='w-10/12 md:w-8/12 lg:w-4/12 mx-auto space-y-10'>
                 <form onSubmit={handleUpdateText}>
